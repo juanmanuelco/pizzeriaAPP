@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context="com.opcion.juan.pizzeria.activityBebidas">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12px"
+        android:layout_marginRight="12px"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="7dp"
+            android:text="Productos"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtBuscarBebidas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="10px"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:ems="10"
+                android:hint="Buscar..."
+                android:inputType="textPersonName"
+                android:paddingBottom="6dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="6dp"
+                android:textColor="#000"
+                android:textColorHint="#665D5D" />
+
+            <ImageButton
+                android:id="@+id/btnBuscarBebidas"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:onClick="buscarBebidas"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/buscar" />
+
+            <ImageButton
+                android:id="@+id/btnCarritobebidas"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:scaleType="fitXY"
+                android:onClick="abrirCarrito"
+                app:srcCompat="@drawable/carrito" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/BebidaCocaColaGrande"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgBeCoGr"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/bebidacocacolagrande" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tBeCoG"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Coca Cola Vaso Grande"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioBebCocaGran"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$3.00"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtBCG"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:layout_weight="0.97"
+                                    android:background="#fff"
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:text="0"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D" />
+
+                                <Button
+                                    android:id="@+id/btnAddBCG"
+                                    android:layout_width="40dp"
+                                    android:onClick="addBCG"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+                                <Button
+                                    android:id="@+id/btnLessBCG"
+                                    android:layout_width="40dp"
+                                    android:onClick="lessBCG"
+                                    android:layout_height="wrap_content"
+                                    android:text="-" />
+                                <Button
+                                    android:id="@+id/btnOkBCG"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrBCG"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/BebidaCocaColaPer"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgBeCoPe"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/bebidacocacolapersonal" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tBeCoP"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Coca cola personal"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioBebidaCocaPersonal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$0.70"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtBCP"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddBCP"
+                                    android:layout_width="40dp"
+                                    android:onClick="addBCP"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessBeCocaPer"
+                                    android:layout_width="40dp"
+                                    android:onClick="lessBCP"
+                                    android:layout_height="wrap_content"
+                                    android:text="-" />
+                                <Button
+                                    android:id="@+id/btnOkBCP"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrBCP"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/BebidaInkaPersonal"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgBeInkPer"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/bebidainkacola" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tInkaPer"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Inka Cola personal"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioBebInkaPer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$0.50"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtBIP"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddBIP"
+                                    android:layout_width="40dp"
+                                    android:onClick="addBIP"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessBIP"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessBIP"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkBIP"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrBIP"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/BebidaPepsiLata"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgBebidapeLa"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/bebidapepsilata" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPepsiLata"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Pepsi Cola Lata"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioBebPespsiLata"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$0.50"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtBPL"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddBPL"
+                                    android:layout_width="40dp"
+                                    android:onClick="addBPL"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessBPL"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessBPL"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkBPL"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrBPL"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/BebidaTropicalLitro"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgBebidaTrLai"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/bebidatropicallitro" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tTropLit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Tropical de litro"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioBebTropLit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$1.10"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtBTL"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddBTL"
+                                    android:layout_width="40dp"
+                                    android:onClick="addBTL"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessBTL"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessBTL"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkBTL"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrBTL"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

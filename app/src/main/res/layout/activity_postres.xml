@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context="com.opcion.juan.pizzeria.activityPostres">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12px"
+        android:layout_marginRight="12px"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="7dp"
+            android:text="Productos"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txtBuscarPostres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="10px"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:ems="10"
+                android:hint="Buscar..."
+                android:inputType="textPersonName"
+                android:paddingBottom="6dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="6dp"
+                android:textColor="#000"
+                android:textColorHint="#665D5D" />
+
+            <ImageButton
+                android:id="@+id/btnBuscarPostres"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:onClick="buscarPostres"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/buscar" />
+
+            <ImageButton
+                android:id="@+id/btnCarritopostres"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:scaleType="fitXY"
+                android:onClick="abrirCarrito"
+                app:srcCompat="@drawable/carrito" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--Desde aqui-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreBanSplit"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPoBaSp"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postrebananasplit" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPoBaSp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Banana Split"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioBaSP"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$4.00"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPBS"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:layout_weight="0.97"
+                                    android:background="#fff"
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:text="0"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D" />
+
+                                <Button
+                                    android:id="@+id/btnAddPBS"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPBS"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+                                <Button
+                                    android:id="@+id/btnLessPBS"
+                                    android:layout_width="40dp"
+                                    android:onClick="lessBPS"
+                                    android:layout_height="wrap_content"
+                                    android:text="-" />
+                                <Button
+                                    android:id="@+id/btnOkPBS"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPBS"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreCoHeFre"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPoCoHeFr"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postrecopaheladofresa" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPoCoHF"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Copa de helado de fresa"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioPostreCoHeFr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$3.50"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPCF"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddPCF"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPCF"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessPCF"
+                                    android:layout_width="40dp"
+                                    android:onClick="lessPCF"
+                                    android:layout_height="wrap_content"
+                                    android:text="-" />
+                                <Button
+                                    android:id="@+id/btnOkPCF"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPCF"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreCoHeDu"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPoCoHeDu"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postrecopaheladodurazno" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPoCHD"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Copa de helado de durazno"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioCoHeDu"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$2.75"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtCHD"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddCHD"
+                                    android:layout_width="40dp"
+                                    android:onClick="addCHD"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLesCHD"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessCHD"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkCHD"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrCHD"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreHambSen"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPostreHambSen"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postrehamburguesasencilla" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPostHamSen"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Hamburguesa sencilla"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioHambSen"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$1.50"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPHS"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddPHS"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPHS"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessPHS"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessPHS"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkPHS"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPHS"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreHambEsp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPostreHambEsp"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postrehaamburguesaespecial" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPostHamEsp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Hamburguesa especial"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioHamEsp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$2.50"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPHE"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddPHE"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPHE"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessPHE"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessPHE"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkPHE"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPHE"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreLitroH"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPoLiH"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postrelitrohelado" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPoBaLH"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Listro de helado"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioPLH"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$4.00"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPLH"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:layout_weight="0.97"
+                                    android:background="#fff"
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:text="0"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D" />
+
+                                <Button
+                                    android:id="@+id/btnAddPLH"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPLH"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+                                <Button
+                                    android:id="@+id/btnLessPLH"
+                                    android:layout_width="40dp"
+                                    android:onClick="lessPLH"
+                                    android:layout_height="wrap_content"
+                                    android:text="-" />
+                                <Button
+                                    android:id="@+id/btnOkPLH"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPLH"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreSCH"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPoSCH"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postresanduchedechancho" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPoSCH"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Sánduche de chancho"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioPostreSCH"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$2.75"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPSCH"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddPSCH"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPSCH"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessPSCH"
+                                    android:layout_width="40dp"
+                                    android:onClick="lessPSCH"
+                                    android:layout_height="wrap_content"
+                                    android:text="-" />
+                                <Button
+                                    android:id="@+id/btnOkPSCH"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPSCH"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreSJ"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPoSJ"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postresanduchedejamon" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPoSJ"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Sánduche de jamón"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioPostreSJ"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$2.50"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPSJ"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddPSJ"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPSJ"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLesPSJ"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessPSJ"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkPSJ"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPSJ"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreSPV"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPostreSPV"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postresanduchedepavo" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPostSPV"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Sánduche de pavo"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioPSPV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$3.50"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPSPV"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddPSPV"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPSPV"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessPSPV"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessPSPV"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkPSPV"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPSPV"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/PostreSPLL"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imgPostreSPLL"
+                            android:layout_width="103dp"
+                            android:layout_height="95dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/postresanduchedepollo" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tPostSPLL"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="4dp"
+                                android:text="Sánduche de pollo"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/precioSPLL"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4px"
+                                android:text="$2.75"
+                                android:textAlignment="center"
+                                android:textColor="#fff"
+                                android:textSize="14sp"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="17px"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <EditText
+                                    android:id="@+id/txtPSPLL"
+                                    android:layout_width="156dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="12px"
+                                    android:background="#fff"
+                                    android:text="0"
+
+                                    android:inputType="numberSigned"
+                                    android:paddingBottom="7dp"
+                                    android:paddingLeft="6dp"
+                                    android:paddingRight="6dp"
+                                    android:paddingTop="6dp"
+                                    android:textColor="#000"
+                                    android:textColorHint="#665D5D"
+                                    android:layout_weight="0.97" />
+
+                                <Button
+                                    android:id="@+id/btnAddPSPLL"
+                                    android:layout_width="40dp"
+                                    android:onClick="addPSPLL"
+                                    android:layout_height="wrap_content"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/btnLessPSPLL"
+                                    android:layout_width="40dp"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="lessPSPLL"
+                                    android:text="-" />
+
+                                <Button
+                                    android:id="@+id/btnOkPSPLL"
+                                    android:layout_width="50dp"
+                                    android:onClick="addCarrPSPLL"
+                                    android:layout_height="wrap_content"
+                                    android:text="OK" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--Hasta aquí-->
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

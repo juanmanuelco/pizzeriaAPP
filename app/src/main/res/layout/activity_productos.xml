@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context="com.opcion.juan.pizzeria.productosActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="32px"
+            android:layout_marginRight="32px"
+            android:maxHeight="36dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnCarritoProductos"
+                android:layout_width="36dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.10"
+                android:adjustViewBounds="true"
+                android:onClick="abrirCarrito"
+                android:background="@color/colorPrimary"
+                android:cropToPadding="true"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/carrito" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="12dp"
+                android:text="Productos"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="22sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="36dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:onClick="cerrarSesion"
+                app:srcCompat="@drawable/logout" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27px"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnPizzasProductos"
+                    android:layout_width="207dp"
+                    android:layout_height="158dp"
+                    android:cropToPadding="true"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    android:onClick="abrirPizzas"
+                    app:srcCompat="@drawable/pizza" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:layout_marginTop="12dp"
+                    android:text="Pizzas" />
+                <ImageButton
+                    android:id="@+id/btnBebidasProductos"
+                    android:layout_width="207dp"
+                    android:layout_height="158dp"
+                    android:cropToPadding="true"
+                    android:layout_marginTop="12dp"
+                    android:layout_gravity="center"
+                    android:onClick="abrirBebidas"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/bebidabebidas" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:layout_marginTop="12dp"
+                    android:text="Bebidas" />
+                <ImageButton
+                    android:id="@+id/btnPostresProductos"
+                    android:layout_width="207dp"
+                    android:layout_height="158dp"
+                    android:cropToPadding="true"
+                    android:layout_marginTop="12dp"
+                    android:layout_gravity="center"
+                    android:onClick="abrirPostres"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/postres" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+
+                    android:layout_marginBottom="28sp"
+                    android:layout_marginTop="12dp"
+                    android:text="Postres" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>
