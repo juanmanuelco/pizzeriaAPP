@@ -85,16 +85,18 @@ public class activityBebidas extends AppCompatActivity {
             SharedPreferences.Editor editor=elementosCarr.edit();
             editor.putString("registros",stringBuilder.toString());
             editor.commit();
+            //Muestra los mensajes
             Toast.makeText(activityBebidas.this, "Ingresado", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             Toast.makeText(activityBebidas.this, "Su dispositivo es incompatible", Toast.LENGTH_SHORT).show();
         }
     }
+    //Muestra el carrito
     public void abrirCarrito(View v){
         Intent carrito = new Intent(getApplicationContext(),CarritoActivity.class );
         startActivity(carrito);
     }
-
+    //Permite ir agregando valores al carrito
     public void addCarrBCG(View v){
         TextView nombre=(TextView)findViewById(R.id.tBeCoG);
         Double precio=3.00d;
@@ -135,10 +137,7 @@ public class activityBebidas extends AppCompatActivity {
         elementosCarrito.add(aGuardar);
         guardado(elementosCarrito);
     }
-
-
-
-
+    //Con esto el buscador puede funcionar
     public void buscarBebidas(View v){
         Filtro busqueda=new Filtro();
 
