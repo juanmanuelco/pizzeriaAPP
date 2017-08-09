@@ -16,16 +16,20 @@ import negocio.Filtro;
 import negocio.controlCantidad;
 
 public class activityBebidas extends AppCompatActivity {
+    //Este es un semaforo
     Boolean abiertoya=false;
+    //Aqui se guardarán los datos del carrito
     ArrayList<String[]> elementosCarrito=new ArrayList<String[]>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bebidas);
         try{
+            //Obtiene la información del carrito y la guarda en el arraylist
             SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
             String elemCarrito=elementosCarr.getString("registros","");
             String[] items=elemCarrito.split(",");
+            //Si es que hay datos los asigna
             if(!elemCarrito.equals("")){
                 for ( int i=0;i<items.length;i+=5){
                     elementosCarrito.add(new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]});
@@ -39,6 +43,7 @@ public class activityBebidas extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //El semáforo indica si se debe reiiciar o no el app cuando entra en estado de superposicion
         if(abiertoya){
             Intent mIntent = getIntent();
             finish();
@@ -49,10 +54,12 @@ public class activityBebidas extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        //Cambia el estado del semaforlo
         abiertoya=true;
     }
 
     public String[] registrarCarrito(int id, TextView nombre, Double precio, EditText cantidad){
+        //Convierte los datos de las bebidas en un array de datos
         String Nombre=nombre.getText().toString();
         String Cantidad=cantidad.getText().toString();
         String subtotal=Double.toString(precio* (Integer.parseInt(Cantidad)));
@@ -60,6 +67,7 @@ public class activityBebidas extends AppCompatActivity {
     }
     public void guardado(ArrayList<String[]>elementosCarrito ){
         try{
+            //Genera un stringBuilder otorgando los datos del carrito
             StringBuilder stringBuilder=new StringBuilder();
             for(int i=0;i<elementosCarrito.size();i++){
                 String [] temporal=elementosCarrito.get(i);
@@ -72,6 +80,7 @@ public class activityBebidas extends AppCompatActivity {
                     }
                 }
             }
+            //Ahora guarda los datos como fijos para poder acceder a ellos desde cualquier otra pantalla
             SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
             SharedPreferences.Editor editor=elementosCarr.edit();
             editor.putString("registros",stringBuilder.toString());

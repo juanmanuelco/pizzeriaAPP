@@ -52,11 +52,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(principal);
         }
     }
+    //Evita que se regrese a la pantalla principal
     @Override
     public void onBackPressed() {
 
     }
-    //abrirRecuperar
+    //Abre las diferentes actividades del sistema
     public void abrirRecuperar(View v){
         Intent recuperar = new Intent(getApplicationContext(),recuperarActivity.class );
         startActivity(recuperar);
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "usuario no existe", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            //Guarda los
+                            //Guarda los valores de datos del usuario en formato tipo JSON
                             JsonParser parser = new JsonParser();
                             JsonElement elementObject = parser.parse(result);
                             nombre = elementObject.getAsJsonObject().get("nombre").getAsString();
@@ -99,12 +100,14 @@ public class MainActivity extends AppCompatActivity {
                             cedula= elementObject.getAsJsonObject().get("cedula").getAsString();
                             celular=elementObject.getAsJsonObject().get("celular").getAsString();
                             correo=elementObject.getAsJsonObject().get("username").getAsString();
+                            //Si no hay nada entonces muestra el mensaje
                             if(correo.isEmpty()){
                                 Toast.makeText(MainActivity.this, "No hay datos", Toast.LENGTH_SHORT).show();
                             }else{
                                 //Guarda la sesión del usuario
                                 boolean estaInsertado =dbSQLITE.insertarUser(nombre,apelllido,cedula,celular,correo);
                                 if(estaInsertado){
+                                    //Una vez que inicia sesión sus datos persisstiran
                                     Toast.makeText(MainActivity.this,"Iniciando sesión",Toast.LENGTH_SHORT).show();
                                     Intent principal = new Intent(getApplicationContext(),productosActivity.class );
                                     startActivity(principal);
@@ -115,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    //Si encuentra un error de envío lo muestra
                     Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     error.printStackTrace();
                 }
@@ -122,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
             ){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
+                    //Estos son los datos que se envian del app al servidor
+                    //Estos datos se comparan con los guardados en la BASE DE DATOS NO RELACIONAL MONGODB
                     Map <String,String> params =new HashMap<String, String >();
                     params.put("username",txtCorreoLogin.getText().toString());
                     params.put("password",txtPasswordLogin.getText().toString());
@@ -130,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
             };
             singletonDatos.getInstancia(MainActivity.this).addToRequest(stringRequest);
         }else {
+            //Si hay espacios en blanco muestra el error
             AlertDialog.Builder alertDialogBuilder;
             alertDialogBuilder=new AlertDialog.Builder(MainActivity.this);
             alertDialogBuilder.setTitle("Error");
