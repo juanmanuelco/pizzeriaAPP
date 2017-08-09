@@ -20,6 +20,11 @@ import negocio.Filtro;
 import negocio.controlCantidad;
 
 public class activityPizzas extends AppCompatActivity {
+
+    /*
+    Los mismos pasos que son usados en la actividad de las bebidas es usada tanto en pizzas como en postres
+     */
+
     ArrayList<String[]>elementosCarrito=new ArrayList<String[]>();
     Boolean abiertoya=false;
     @Override

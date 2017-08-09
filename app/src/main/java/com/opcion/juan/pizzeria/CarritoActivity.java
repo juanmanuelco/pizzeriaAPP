@@ -31,17 +31,22 @@ import java.util.List;
 import java.util.Map;
 
 public class CarritoActivity extends AppCompatActivity {
+    //Aqui se guardarán los elementos del carritp
     ArrayList<String> elementosCarrito=new ArrayList<String>();
+    //esto es un respaldo de los elementos del carritpo
     ArrayList<String[]>elementosCarritoV2=new ArrayList<String[]>();
+    //Crea una instancia para obtener los datos del usuario
     DBusuarios dbSQLITE;
-
+    //Los elementos del carrito se mostrarán en este listview
     private ListView listCarrito;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrito);
+        //Obtenemos los datos de usuario registrados en la base de datos
         dbSQLITE = new DBusuarios(this);
         try{
+            //Los elementos del  Shared preferences almacenados son guardados ahora en el arraylist
             final SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
             String elemCarrito=elementosCarr.getString("registros","");
             String[] items=elemCarrito.split(",");
@@ -52,6 +57,7 @@ public class CarritoActivity extends AppCompatActivity {
                     elementosCarritoV2.add(new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]});
                 }
             }
+            //Ahora procedemos a guardar estos datos en la vista de lista
             listCarrito= (ListView) findViewById(R.id.itemsCarrito);
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                     this,android.R.layout.simple_list_item_1,elementosCarrito);
@@ -60,6 +66,7 @@ public class CarritoActivity extends AppCompatActivity {
             listCarrito.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    //Si tocamos un elemento de esta lista lo eliminaremos del cartito
                     elementosCarritoV2.remove(i);
                     StringBuilder stringBuilder=new StringBuilder();
                     for(int k=0;k<elementosCarritoV2.size();k++){
@@ -73,10 +80,12 @@ public class CarritoActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    //Después de ue el elementoo este actualizado lo guardaremos nuevamemte
                     SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
                     SharedPreferences.Editor editor=elementosCarr.edit();
                     editor.putString("registros",stringBuilder.toString());
                     editor.commit();
+                    //Reiniciamos la actividad
                     Intent mIntent = getIntent();
                     finish();
                     startActivity(mIntent);
@@ -91,21 +100,26 @@ public class CarritoActivity extends AppCompatActivity {
         try{
             Toast.makeText(CarritoActivity.this, "Su dispositivo es incompatible", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
+            //eliminamos los datos de carrito del shared preferences
             SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
             SharedPreferences.Editor editor=elementosCarr.edit();
             editor.putString("registros","");
             editor.commit();
+            //reiniciamos el app
             Intent mIntent = getIntent();
             finish();
             startActivity(mIntent);
         }
     }
     public void enviarPedido(View v){
+        //Usamos la libreria de VOLLEY para definir los datos a enviar al servidor
         String  serverURL="http://dulceyfriopizzas.herokuapp.com/pedidos";
+        //Obtenemos los valores del carrito
         SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
         String elemCarrito=elementosCarr.getString("registros","");
         EditText direc=(EditText)findViewById(R.id.txtDireccionEntrega);
         final String direccion=direc.getText().toString();
+        //Si se especifico una dirección y los elementos del carrito entonces procede a guardar
         if(elemCarrito.equals("") || direccion.trim().equals("")){
             Toast.makeText(CarritoActivity.this, "No hay nada que enviar o no se especificó una dirección", Toast.LENGTH_SHORT).show();
         }else{
@@ -113,19 +127,23 @@ public class CarritoActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String result) {
+                            //Depende de las respuestas del servidor hace lo siguiente
                             if(result.toString().equals("Error")){
                                 Toast.makeText(CarritoActivity.this, "Error de red", Toast.LENGTH_SHORT).show();
                             }else{
+                                //Si se realizo la totalidad bien entonces borra el carrito
                                 SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
                                 SharedPreferences.Editor editor=elementosCarr.edit();
                                 editor.putString("registros","");
                                 editor.commit();
+                                //Muestra un dialogo informandole al usuario ue este pendiente del email
                                 AlertDialog.Builder builder = new AlertDialog.Builder(CarritoActivity.this);
                                 builder.setTitle("Estimado usuario")
                                         .setMessage("En breve le llegará un correo electrónico donde se detallará la información de su pedido")
                                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
+                                                //Cierra el dialogo y reinicia el app
                                                 Intent mIntent = getIntent();
                                                 finish();
                                                 startActivity(mIntent);
@@ -139,6 +157,7 @@ public class CarritoActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    //Muestra un error
                     Toast.makeText(CarritoActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     error.printStackTrace();
                 }
@@ -146,16 +165,19 @@ public class CarritoActivity extends AppCompatActivity {
             ){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
+                    //Define los valores a enviar a la base de datos
                     Cursor res = dbSQLITE.selectVerTodos();
                     String usuario="";
                     int i=5;
                     while (res.moveToNext()){
                         usuario=res.getString(i);
                     }
-
+                    //Estos son los valores del carrito a enviar
                     final SharedPreferences elementCarr=getSharedPreferences("carrito",0);
                     final String carritoEnviar=elementCarr.getString("registros","");
+                    //Obtenemos los datos  de fecha actual
                     final Date fecha= new Date();
+                    //Generamos un mapa de datos
                     Map <String,String> params =new HashMap<String, String >();
                     params.put("username",usuario);
                     params.put("carrito",carritoEnviar);
@@ -164,6 +186,7 @@ public class CarritoActivity extends AppCompatActivity {
                     return params;
                 }
             };
+            //Usamos un modelo de datos para el envío
             singletonDatos.getInstancia(CarritoActivity.this).addToRequest(stringRequest);
         }
     }
