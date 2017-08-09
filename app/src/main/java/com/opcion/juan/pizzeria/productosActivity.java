@@ -1,6 +1,7 @@
 package com.opcion.juan.pizzeria;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,10 @@ public class productosActivity extends AppCompatActivity {
         Intent login = new Intent(getApplicationContext(),MainActivity.class );
         Toast.makeText(productosActivity.this, "Cerrando sesión", Toast.LENGTH_SHORT).show();
         startActivity(login);
+        SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
+        SharedPreferences.Editor editor=elementosCarr.edit();
+        editor.putString("registros","");
+        editor.commit();
     }
     public void abrirPizzas(View v){
         Intent pizzas = new Intent(getApplicationContext(),activityPizzas.class );

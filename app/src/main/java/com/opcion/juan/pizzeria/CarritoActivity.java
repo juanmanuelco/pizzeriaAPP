@@ -17,8 +17,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,43 +89,56 @@ public class CarritoActivity extends AppCompatActivity {
         startActivity(mIntent);
     }
     public void enviarPedido(View v){
-        String  serverURL="http://dulceyfriopizzas.herokuapp.com/index/pedidos";
+        String  serverURL="http://192.168.1.9:5000/pedidos";
         SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
         String elemCarrito=elementosCarr.getString("registros","");
         if(elemCarrito.equals("")){
             Toast.makeText(CarritoActivity.this, "No hay nada que enviar", Toast.LENGTH_SHORT).show();
         }else{
-            Cursor res = dbSQLITE.selectVerTodos();
-            String usuario="";
-            int i=5;
-            while (res.moveToNext()){
-                usuario=res.getString(i);
-            }
-            return;
-
-            /*
-            StringRequest stringRequest=new StringRequest(Request.Method.POST, serverURL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-
-                }
-            }, new Response.ErrorListener() {
+            StringRequest stringRequest=new StringRequest(Request.Method.POST, serverURL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String result) {
+                            if(result.toString().equals("Error")){
+                                Toast.makeText(CarritoActivity.this, "Error de red", Toast.LENGTH_SHORT).show();
+                            }else{
+                                SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
+                                SharedPreferences.Editor editor=elementosCarr.edit();
+                                editor.putString("registros","");
+                                editor.commit();
+                                Intent mIntent = getIntent();
+                                finish();
+                                startActivity(mIntent);
+                                Toast.makeText(CarritoActivity.this, "Pedido realizado con éxito", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    Toast.makeText(CarritoActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    error.printStackTrace();
                 }
-            }){
+            }
+            ){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-
+                    Cursor res = dbSQLITE.selectVerTodos();
+                    String usuario="";
+                    int i=5;
+                    while (res.moveToNext()){
+                        usuario=res.getString(i);
+                    }
+                    final SharedPreferences elementCarr=getSharedPreferences("carrito",0);
+                    final String carritoEnviar=elementCarr.getString("registros","");
+                    final Date fecha= new Date();
                     Map <String,String> params =new HashMap<String, String >();
-                    params.put("username",txtCorreoLogin.getText().toString());
-                    params.put("password",txtPasswordLogin.getText().toString());
+                    params.put("username",usuario);
+                    params.put("carrito",carritoEnviar);
+                    params.put("fecha",fecha.toString());
                     return params;
-
                 }
             };
-            */
+            singletonDatos.getInstancia(CarritoActivity.this).addToRequest(stringRequest);
         }
     }
 }

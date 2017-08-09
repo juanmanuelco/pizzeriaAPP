@@ -16,6 +16,7 @@ import negocio.Filtro;
 import negocio.controlCantidad;
 
 public class activityBebidas extends AppCompatActivity {
+    Boolean abiertoya=false;
     ArrayList<String[]> elementosCarrito=new ArrayList<String[]>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,27 @@ public class activityBebidas extends AppCompatActivity {
         String[] items=elemCarrito.split(",");
         if(!elemCarrito.equals("")){
             for ( int i=0;i<items.length;i+=5){
-                elementosCarrito.add(new String[]{items[i], items[i+1], items[1+2], items[1+3], items[i+4]});
+                elementosCarrito.add(new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]});
             }
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(abiertoya){
+            Intent mIntent = getIntent();
+            finish();
+            startActivity(mIntent);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        abiertoya=true;
+    }
+
     public String[] registrarCarrito(int id, TextView nombre, Double precio, EditText cantidad){
         String Nombre=nombre.getText().toString();
         String Cantidad=cantidad.getText().toString();
