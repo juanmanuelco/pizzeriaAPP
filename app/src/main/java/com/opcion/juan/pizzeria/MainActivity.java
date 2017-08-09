@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "usuario no existe", Toast.LENGTH_SHORT).show();
                                 return;
                             }
+                            //Guarda los
                             JsonParser parser = new JsonParser();
                             JsonElement elementObject = parser.parse(result);
                             nombre = elementObject.getAsJsonObject().get("nombre").getAsString();
