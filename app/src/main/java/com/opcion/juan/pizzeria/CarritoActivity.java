@@ -1,14 +1,18 @@
 package com.opcion.juan.pizzeria;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -100,8 +104,10 @@ public class CarritoActivity extends AppCompatActivity {
         String  serverURL="http://dulceyfriopizzas.herokuapp.com/pedidos";
         SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
         String elemCarrito=elementosCarr.getString("registros","");
-        if(elemCarrito.equals("")){
-            Toast.makeText(CarritoActivity.this, "No hay nada que enviar", Toast.LENGTH_SHORT).show();
+        EditText direc=(EditText)findViewById(R.id.txtDireccionEntrega);
+        final String direccion=direc.getText().toString();
+        if(elemCarrito.equals("") || direccion.trim().equals("")){
+            Toast.makeText(CarritoActivity.this, "No hay nada que enviar o no se especificó una dirección", Toast.LENGTH_SHORT).show();
         }else{
             StringRequest stringRequest=new StringRequest(Request.Method.POST, serverURL,
                     new Response.Listener<String>() {
@@ -114,10 +120,20 @@ public class CarritoActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor=elementosCarr.edit();
                                 editor.putString("registros","");
                                 editor.commit();
-                                Intent mIntent = getIntent();
-                                finish();
-                                startActivity(mIntent);
-                                Toast.makeText(CarritoActivity.this, "Pedido realizado con éxito", Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(CarritoActivity.this);
+                                builder.setTitle("Estimado usuario")
+                                        .setMessage("En breve le llegará un correo electrónico donde se detallará la información de su pedido")
+                                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent mIntent = getIntent();
+                                                finish();
+                                                startActivity(mIntent);
+                                                Toast.makeText(CarritoActivity.this, "Pedido realizado con éxito", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -136,6 +152,7 @@ public class CarritoActivity extends AppCompatActivity {
                     while (res.moveToNext()){
                         usuario=res.getString(i);
                     }
+
                     final SharedPreferences elementCarr=getSharedPreferences("carrito",0);
                     final String carritoEnviar=elementCarr.getString("registros","");
                     final Date fecha= new Date();
@@ -143,6 +160,7 @@ public class CarritoActivity extends AppCompatActivity {
                     params.put("username",usuario);
                     params.put("carrito",carritoEnviar);
                     params.put("fecha",fecha.toString());
+                    params.put("direccion",direccion);
                     return params;
                 }
             };
