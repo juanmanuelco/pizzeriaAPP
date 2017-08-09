@@ -28,6 +28,7 @@ public class recuperarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recuperar);
 
     }
+    //Pendiente
     public void RecuperarCuenta(View v){
         Toast.makeText(recuperarActivity.this, "No tienes una buena conexión a internet ", Toast.LENGTH_SHORT).show();
     }

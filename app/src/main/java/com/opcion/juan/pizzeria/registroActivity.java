@@ -23,6 +23,7 @@ import java.util.Map;
 import negocio.recorrido;
 
 public class registroActivity extends AppCompatActivity {
+    //Crea  variables donde se guardarán los datos de usuario
     EditText txtNombreRegistro,
             txtApellidoRegistro,
             txtCedulaRegistro,
@@ -30,6 +31,7 @@ public class registroActivity extends AppCompatActivity {
             txtCorreoRegistro,
             txtPasswordRegistro,
             txtRepPassRegistro;
+    //Busca la url del servidor
     String serverURL="http://dulceyfriopizzas.herokuapp.com/users/register";
 
     @Override
@@ -38,6 +40,7 @@ public class registroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
     }
     public void  registrarse(View v){
+        //Asigna los valores
         ProgressDialog progressdialog=new ProgressDialog(registroActivity.this);
         progressdialog.show();
         txtNombreRegistro=(EditText)findViewById(R.id.txtNombreRegistro);
@@ -47,6 +50,7 @@ public class registroActivity extends AppCompatActivity {
         txtCorreoRegistro=(EditText)findViewById(R.id.txtCorreoRegistro);
         txtPasswordRegistro=(EditText)findViewById(R.id.txtPasswordRegistro);
         txtRepPassRegistro=(EditText)findViewById(R.id.txtRepPassRegistro);
+        //Crea un array de EditText
         EditText[] campos=new EditText[]{
             txtNombreRegistro,
             txtApellidoRegistro,
@@ -56,9 +60,10 @@ public class registroActivity extends AppCompatActivity {
             txtPasswordRegistro,
             txtRepPassRegistro
         };
+        //Los recorre para buscar que no esten vacios
         recorrido recor=new recorrido(campos);
         if(recor.Recorrer(campos)){
-            //Aqui empieza
+            //Aqui empieza el envío de datos
             StringRequest stringRequest=new StringRequest(Request.Method.POST, serverURL,
                     new Response.Listener<String>() {
                         @Override
@@ -78,13 +83,15 @@ public class registroActivity extends AppCompatActivity {
                                 Toast.makeText(registroActivity.this, "Ese correo ya esta siendo usado", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            Toast.makeText(registroActivity.this, "Regostrado con éxito", Toast.LENGTH_SHORT).show();
+                            //Permite el ingreso al sistema
+                            Toast.makeText(registroActivity.this, "Registrado con éxito", Toast.LENGTH_SHORT).show();
                             Intent login = new Intent(getApplicationContext(),MainActivity.class );
                             startActivity(login);
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    //Devuelve un error
                     Toast.makeText(registroActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     error.printStackTrace();
                 }
@@ -92,6 +99,7 @@ public class registroActivity extends AppCompatActivity {
             ){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
+                    //Crea un mapa de datos de usuario
                     Map <String,String> params =new HashMap<String, String >();
                     params.put("nombre",txtNombreRegistro.getText().toString());
                     params.put("apellido",txtApellidoRegistro.getText().toString());
@@ -103,9 +111,11 @@ public class registroActivity extends AppCompatActivity {
                     return params;
                 }
             };
+            //Usa el modelo del singleton
             singletonDatos.getInstancia(registroActivity.this).addToRequest(stringRequest);
-            ///Aqui termina
+            ///Aqui termina el envio
         }else {
+            //Si al hacer el recorrido habian datos en blanco lo muestra
             AlertDialog.Builder alertDialogBuilder;
             alertDialogBuilder=new AlertDialog.Builder(registroActivity.this);
             alertDialogBuilder.setTitle("Error");

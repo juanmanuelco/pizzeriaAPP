@@ -30,15 +30,18 @@ public class productosActivity extends AppCompatActivity {
 
     }
     public void cerrarSesion(View v ){
+        //Elimina los datos de usuario
         dbSQLITE.eliminar();
         Intent login = new Intent(getApplicationContext(),MainActivity.class );
         Toast.makeText(productosActivity.this, "Cerrando sesión", Toast.LENGTH_SHORT).show();
         startActivity(login);
+        //ELimina los datos que pudieran existir en el carrito
         SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
         SharedPreferences.Editor editor=elementosCarr.edit();
         editor.putString("registros","");
         editor.commit();
     }
+    //Abre los productos para poder hacer pedidos
     public void abrirPizzas(View v){
         Intent pizzas = new Intent(getApplicationContext(),activityPizzas.class );
         startActivity(pizzas);
