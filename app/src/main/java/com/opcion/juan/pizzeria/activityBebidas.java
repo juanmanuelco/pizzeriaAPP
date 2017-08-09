@@ -139,14 +139,15 @@ public class activityBebidas extends AppCompatActivity {
     }
     //Con esto el buscador puede funcionar
     public void buscarBebidas(View v){
+        //Creo una variable de tipo FIltro (ver paquete Negocio)
         Filtro busqueda=new Filtro();
-
+        //Obytiene los datosde las bebidas en la interfaz
         LinearLayout BebidaCocaColaGrande=(LinearLayout)findViewById(R.id.BebidaCocaColaGrande);
         LinearLayout BebidaCocaColaPer=(LinearLayout)findViewById(R.id.BebidaCocaColaPer);
         LinearLayout BebidaInkaPersonal=(LinearLayout)findViewById(R.id.BebidaInkaPersonal);
         LinearLayout BebidaPepsiLata=(LinearLayout)findViewById(R.id.BebidaPepsiLata);
         LinearLayout BebidaTropicalLitro=(LinearLayout)findViewById(R.id.BebidaTropicalLitro);
-
+        //Oculta todos los productos
         busqueda.ocultar(new LinearLayout[]{
                 BebidaCocaColaGrande,
                 BebidaCocaColaPer,
@@ -154,15 +155,15 @@ public class activityBebidas extends AppCompatActivity {
                 BebidaPepsiLata,
                 BebidaTropicalLitro
         });
-
+        //Obtiene el parámetro de búsqueda
         String buscar=((EditText)findViewById(R.id.txtBuscarBebidas)).getText().toString().toUpperCase();
-
+        //Estas son las cadenas que analizará el buscador
         String bebidaCocaColaGrande="bebida coca cola cocacola grande $3.00 $3,00  ";
         String bebidaCocaColaPer="bebida coca cola cocacola personal $0.70 $0,70  ";
         String bebidaInkaPersonal="bebida inka cola inkacola personal $0.50 $0,50";
         String bebidaPepsiLata="bebida pepsicola cola pepsi  lata $0.50 $0,50";
         String bebidaTropicalLitro="bebida tropical litro $1.10 $1,10";
-
+        //Mostrará aquellas que coincidan
         if(bebidaCocaColaGrande.toUpperCase().indexOf(buscar)>-1){
             busqueda.mostrar(BebidaCocaColaGrande);
         }
@@ -179,7 +180,7 @@ public class activityBebidas extends AppCompatActivity {
             busqueda.mostrar(BebidaTropicalLitro);
         }
     }
-
+    //Estos  métodosincrementarán la cantidad a ingresar en el carrito
     //Añadir________________________________________________________________________________________
     public void  addBCG(View v){
         EditText ETcantidad=(EditText)findViewById(R.id.txtBCG);
@@ -206,7 +207,7 @@ public class activityBebidas extends AppCompatActivity {
         ETcantidad.setText(controlCantidad.add(ETcantidad));
         return;
     }
-
+    //Estos métodos quitarán la existencia de los productos para llenar el carrito
     //Quitar________________________________________________________________________________________
     public void lessBCG(View v){
         EditText ETcantidad=(EditText)findViewById(R.id.txtBCG);
