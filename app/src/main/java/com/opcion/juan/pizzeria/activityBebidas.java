@@ -22,13 +22,17 @@ public class activityBebidas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bebidas);
-        SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
-        String elemCarrito=elementosCarr.getString("registros","");
-        String[] items=elemCarrito.split(",");
-        if(!elemCarrito.equals("")){
-            for ( int i=0;i<items.length;i+=5){
-                elementosCarrito.add(new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]});
+        try{
+            SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
+            String elemCarrito=elementosCarr.getString("registros","");
+            String[] items=elemCarrito.split(",");
+            if(!elemCarrito.equals("")){
+                for ( int i=0;i<items.length;i+=5){
+                    elementosCarrito.add(new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]});
+                }
             }
+        }catch (Exception e){
+            Toast.makeText(activityBebidas.this, "Su dispositivo no es compatible", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -55,23 +59,27 @@ public class activityBebidas extends AppCompatActivity {
         return new String[]{Integer.toString(id), Nombre, Double.toString(precio), Cantidad, subtotal};
     }
     public void guardado(ArrayList<String[]>elementosCarrito ){
-        StringBuilder stringBuilder=new StringBuilder();
-        for(int i=0;i<elementosCarrito.size();i++){
-            String [] temporal=elementosCarrito.get(i);
-            for (int j=0;j<temporal.length;j++){
-                stringBuilder.append(temporal[j]);
-                if(i==elementosCarrito.size() && j==temporal.length){
+        try{
+            StringBuilder stringBuilder=new StringBuilder();
+            for(int i=0;i<elementosCarrito.size();i++){
+                String [] temporal=elementosCarrito.get(i);
+                for (int j=0;j<temporal.length;j++){
+                    stringBuilder.append(temporal[j]);
+                    if(i==elementosCarrito.size() && j==temporal.length){
 
-                }else{
-                    stringBuilder.append(",");
+                    }else{
+                        stringBuilder.append(",");
+                    }
                 }
             }
+            SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
+            SharedPreferences.Editor editor=elementosCarr.edit();
+            editor.putString("registros",stringBuilder.toString());
+            editor.commit();
+            Toast.makeText(activityBebidas.this, "Ingresado", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(activityBebidas.this, "Su dispositivo es incompatible", Toast.LENGTH_SHORT).show();
         }
-        SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
-        SharedPreferences.Editor editor=elementosCarr.edit();
-        editor.putString("registros",stringBuilder.toString());
-        editor.commit();
-        Toast.makeText(activityBebidas.this, "Ingresado", Toast.LENGTH_SHORT).show();
     }
     public void abrirCarrito(View v){
         Intent carrito = new Intent(getApplicationContext(),CarritoActivity.class );

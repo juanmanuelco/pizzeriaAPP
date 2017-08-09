@@ -37,59 +37,67 @@ public class CarritoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrito);
         dbSQLITE = new DBusuarios(this);
-        final SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
-        String elemCarrito=elementosCarr.getString("registros","");
-        String[] items=elemCarrito.split(",");
-        if(!elemCarrito.equals("")){
-            for ( int i=0;i<items.length;i+=5){
-                String[] der=new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]};
-                elementosCarrito.add("Pidio "+items[i+3]+" "+items[i+1]+" de precio $"+items[i+2]+", dando el valor de $"+items[i+4]);
-                elementosCarritoV2.add(new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]});
+        try{
+            final SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
+            String elemCarrito=elementosCarr.getString("registros","");
+            String[] items=elemCarrito.split(",");
+            if(!elemCarrito.equals("")){
+                for ( int i=0;i<items.length;i+=5){
+                    String[] der=new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]};
+                    elementosCarrito.add("Pidio "+items[i+3]+" "+items[i+1]+" de precio $"+items[i+2]+", dando el valor de $"+items[i+4]);
+                    elementosCarritoV2.add(new String[]{items[i], items[i+1], items[i+2], items[i+3], items[i+4]});
+                }
             }
-        }
-        listCarrito= (ListView) findViewById(R.id.itemsCarrito);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                        this,android.R.layout.simple_list_item_1,elementosCarrito);
+            listCarrito= (ListView) findViewById(R.id.itemsCarrito);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                    this,android.R.layout.simple_list_item_1,elementosCarrito);
 
-        listCarrito.setAdapter(arrayAdapter);
-        listCarrito.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                elementosCarritoV2.remove(i);
-                StringBuilder stringBuilder=new StringBuilder();
-                for(int k=0;k<elementosCarritoV2.size();k++){
-                    String [] temporal=elementosCarritoV2.get(k);
-                    for (int j=0;j<temporal.length;j++){
-                        stringBuilder.append(temporal[j]);
-                        if(k==elementosCarritoV2.size() && j==temporal.length){
+            listCarrito.setAdapter(arrayAdapter);
+            listCarrito.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    elementosCarritoV2.remove(i);
+                    StringBuilder stringBuilder=new StringBuilder();
+                    for(int k=0;k<elementosCarritoV2.size();k++){
+                        String [] temporal=elementosCarritoV2.get(k);
+                        for (int j=0;j<temporal.length;j++){
+                            stringBuilder.append(temporal[j]);
+                            if(k==elementosCarritoV2.size() && j==temporal.length){
 
-                        }else{
-                            stringBuilder.append(",");
+                            }else{
+                                stringBuilder.append(",");
+                            }
                         }
                     }
+                    SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
+                    SharedPreferences.Editor editor=elementosCarr.edit();
+                    editor.putString("registros",stringBuilder.toString());
+                    editor.commit();
+                    Intent mIntent = getIntent();
+                    finish();
+                    startActivity(mIntent);
                 }
-                SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
-                SharedPreferences.Editor editor=elementosCarr.edit();
-                editor.putString("registros",stringBuilder.toString());
-                editor.commit();
-                Intent mIntent = getIntent();
-                finish();
-                startActivity(mIntent);
-            }
-        });
+            });
+        }catch (Exception e){
+            Toast.makeText(CarritoActivity.this, "Su dispositivo es incompatible", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void vaciarCarrito(View v){
-        SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
-        SharedPreferences.Editor editor=elementosCarr.edit();
-        editor.putString("registros","");
-        editor.commit();
-        Intent mIntent = getIntent();
-        finish();
-        startActivity(mIntent);
+        try{
+            Toast.makeText(CarritoActivity.this, "Su dispositivo es incompatible", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
+            SharedPreferences.Editor editor=elementosCarr.edit();
+            editor.putString("registros","");
+            editor.commit();
+            Intent mIntent = getIntent();
+            finish();
+            startActivity(mIntent);
+        }
     }
     public void enviarPedido(View v){
-        String  serverURL="http://192.168.1.9:5000/pedidos";
+        String  serverURL="http://dulceyfriopizzas.herokuapp.com/pedidos";
         SharedPreferences elementosCarr=getSharedPreferences("carrito",0);
         String elemCarrito=elementosCarr.getString("registros","");
         if(elemCarrito.equals("")){
