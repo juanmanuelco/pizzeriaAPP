@@ -11,6 +11,20 @@ import com.android.volley.toolbox.Volley;
  */
 
 public class singletonDatos {
+
+    /*
+    permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto.
+    Su intención consiste en garantizar que una clase sólo tenga una instancia y proporcionar un punto de acceso global a ella.
+    se implementa creando en nuestra clase un método que crea una instancia del objeto sólo si todavía no existe alguna.
+    Para asegurar que la clase no puede ser instanciada nuevamente se regula el alcance del constructor
+    (con modificadores de acceso como protegido o privado).
+
+La instrumentación del patrón puede ser delicada en programas con múltiples hilos de ejecución.
+Si dos hilos de ejecución intentan crear la instancia al mismo tiempo y esta no existe todavía,
+sólo uno de ellos debe lograr crear el objeto. La solución clásica para este problema es
+utilizar exclusión mutua en el método de creación de la clase que implementa el patrón.
+     */
+
     private static singletonDatos instanciaSingleton;
     private RequestQueue requestDatos;
     private static Context mCtx;

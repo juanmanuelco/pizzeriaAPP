@@ -7,6 +7,7 @@ import android.widget.EditText;
  */
 
 public class recorre {
+    //Se usa para verificar la ausencia de espacios en blanco
     private EditText[] campos;
     public recorre(EditText[] camp) // constructor
     {

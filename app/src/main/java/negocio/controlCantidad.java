@@ -7,6 +7,8 @@ import android.widget.EditText;
  */
 
 public class controlCantidad {
+
+    //En esta clase se suman o restan las cantidades a ingresar en el carrito
     public static String add(EditText ETcantidad){
         String cantidad=ETcantidad.getText().toString();
         int nuevaCantidad=Integer.parseInt(cantidad);

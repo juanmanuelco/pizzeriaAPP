@@ -19,6 +19,7 @@ public class recorrido extends recorre{
     }
     public final Boolean Recorrer(EditText[] campos)
     {
+        //Si existe un dato en blanco devuelve false
         int visor=0;
         ArrayList list = new ArrayList();
         for (int i = 0; i < campos.length; i++){list.add(campos[i].getText().toString().trim());}

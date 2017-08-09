@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
  */
 
 public class Filtro {
+    //Muestra los layouts ocultos
     public void mostrar(LinearLayout layoutAnimado)
     {
         if (layoutAnimado.getVisibility() == View.GONE)
@@ -20,7 +21,7 @@ public class Filtro {
             layoutAnimado.setVisibility(View.VISIBLE);
         }
     }
-
+    //Oculta los layouts mostrados
     public void ocultar(LinearLayout[] layoutAnimado)
     {
         for(int i=0;i<layoutAnimado.length;i++){
@@ -31,6 +32,7 @@ public class Filtro {
             }
         }
     }
+    //Anima el mostrar y ocultar de loslayouts
     private void animar(boolean mostrar, LinearLayout layoutAnimado)
     {
         AnimationSet set = new AnimationSet(true);
