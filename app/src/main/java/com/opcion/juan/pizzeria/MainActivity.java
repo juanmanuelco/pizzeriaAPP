@@ -56,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
 
     }
+    //abrirRecuperar
+    public void abrirRecuperar(View v){
+        Intent recuperar = new Intent(getApplicationContext(),recuperarActivity.class );
+        startActivity(recuperar);
+    }
+
     public void Registrarse(View v){
         Intent registro = new Intent(getApplicationContext(),registroActivity.class );
         startActivity(registro);

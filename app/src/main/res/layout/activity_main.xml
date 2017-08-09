@@ -109,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28sp"
                     android:textColor="#fff"
+                    android:onClick="abrirRecuperar"
                     android:layout_weight="1"
                     android:background="?android:attr/colorFocusedHighlight"
                     android:text="Recuperar" />
